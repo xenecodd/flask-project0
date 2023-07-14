@@ -5,25 +5,12 @@ import numpy as np
 import cv2
 
 app = Flask(__name__)
-dic = {
-    0: "battery",
-    1: "brown-glass",
-    2: "white-glass",
-    3: "cardboard",
-    4: "clothes",
-    5: "green-glass",
-    6: "metal",
-    7: "paper",
-    8: "plastic",
-    9: "shoes",
-    10: "trash",
-    11: "biological"
-}
-model = load_model('garbage_model.h5')
+dic = ['DOG', 'HORSE', 'ELEPHANT', 'BUTTERFLY', 'HEN', 'CAT', 'COW', 'SHEEP', 'SPIDER', 'SQUIRREL']
+model = load_model('model.h5')
 
 
 def predict_label(img_path):
-    BOYUT = 150
+    BOYUT = 224
     resim = cv2.imread(img_path, cv2.IMREAD_COLOR)
     resim = cv2.resize(resim, (BOYUT, BOYUT))
     resim = np.array(resim).reshape(-1, BOYUT, BOYUT, 3)
