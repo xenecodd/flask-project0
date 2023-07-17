@@ -29,15 +29,17 @@
     </div>
   </form>
 
-	{% if prediction %}
+    {% if prediction and err==0 %}
   <img src="{{img_path}}" height="400px" width="400px">
-	<h2> Your Prediction   : <i> {{prediction}} </i></h2>
-  {% if percentage>0.5 %}
-  <h3> Percentage   : <i> {{percentage}} </i></h3>
-  {% else %}
-  <h3> Image Could'nt Recognized </h3>
-  {% endif %}
-	{% endif %}
+	<h2> Your Prediction   : <i> {{prediction}}x </i></h2>
+        {% if percentage>0.8 %}
+            <h3> Percentage   : <i> {{percentage}} </i></h3>
+        {% else %}
+            <h3> Image Could'nt Recognized </h3>
+        {% endif %}
+    {% else %}
+        <h3> .jpeg images are not accepted </h3>
+    {% endif %}
 
 </div>
 

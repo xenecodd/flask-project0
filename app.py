@@ -3,7 +3,7 @@ from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
 import cv2
-
+import os
 app = Flask(__name__)
 dic = ['DOG', 'HORSE', 'ELEPHANT', 'BUTTERFLY', 'HEN', 'CAT', 'COW', 'SHEEP', 'SPIDER', 'SQUIRREL']
 model = load_model('model.h5')
@@ -28,8 +28,14 @@ def prediction():
     if request.method == "POST":
         img = request.files['my_image']
         img_path = "static/" + img.filename
+        dosya_adi=img.filename
+        print(img.filename)
+        uzanti=os.path.splitext(dosya_adi)[1].lower()
+        err=0
+        if uzanti == ".jpeg":
+            err=1
         img.save(img_path)
-        p, per = predict_label(img_path)
+        p,per = predict_label(img_path)
     return render_template("index.html", prediction=p, percentage=per, img_path=img_path)
 
 
